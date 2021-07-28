@@ -1,19 +1,20 @@
 <template>
   <ul class="catalog__list">
-    <ProductItem v-for="(product, index) in products" :key="index" :item="product"></ProductItem>
+    <ProductItem v-for="product in products" :key="product.id" :item="product"></ProductItem>
   </ul>
 </template>
 
 <script>
-import ProductItem from "./ProductItem";
+
+import ProductItem from './ProductItem';
 
 export default {
   components: { ProductItem },
   props: {
     products: {
-      type: Array
-    }
-  }
+      type: Array,
+    },
+  },
 };
 </script>
 
