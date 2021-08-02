@@ -6,13 +6,7 @@
       <fieldset class="form__block">
         <legend class="form__legend">Цена</legend>
         <label class="form__label form__label--price">
-          <input
-            class="form__input"
-            type="text"
-            name="min-price"
-            value="0"
-            v-model.number="currentPriceFrom"
-          />
+          <input class="form__input" type="text" name="min-price" value="0" v-model.number="currentPriceFrom"/>
           <span class="form__value">От</span>
         </label>
         <label class="form__label form__label--price">
@@ -46,11 +40,11 @@
       <fieldset class="form__block">
         <legend class="form__legend">Цвет</legend>
         <ul class="colors">
-          <li class="colors__item" v-for="(color, index) in colors" :key="index">
+          <li class="colors__item" v-for="color in colors" :key="color.id">
             <label class="colors__label">
               <input
-            	v-model="currentColor" class="colors__radio sr-only" type="radio" name="color" :value="color.color" />
-              <span class="colors__value" :style="{'background-color': color.color}"> </span>
+            	v-model="currentColorId" class="colors__radio sr-only" type="radio" name="color" :value="color.id"/>
+              <span class="colors__value" :style="{'background-color': color.color}"></span>
             </label>
           </li>
         </ul>
@@ -133,8 +127,8 @@
 </template>
 
 <script>
-import categories from "../data/categories.js";
-import colors from "../data/colors.js";
+import categories from "@/data/categories.js";
+import colors from "@/data/colors.js";
 
 export default {
   data() {
@@ -142,14 +136,14 @@ export default {
       currentPriceFrom: 0,
       currentPriceTo: 0,
       currentCategoryId: 0,
-	  currentColor: '#73B6EA'
+	  currentColorId: 0,
     };
   },
   props: {
     priceFrom: { type: Number },
     priceTo: { type: Number },
     categoryId: { type: Number },
-	itemColor: { type: String }
+	itemColorId: { type: Number }
   },
   computed: {
     categories() {
@@ -169,8 +163,8 @@ export default {
     categoryId(value) {
       this.currentCategoryId = value;
     },
-	itemColor(value) {
-		this.itemColor = value;
+	itemColorId(value) {
+		this.itemColorId = value;
 	}
   },
   methods: {
@@ -178,14 +172,13 @@ export default {
       this.$emit("update:priceFrom", this.currentPriceFrom);
       this.$emit("update:priceTo", this.currentPriceTo);
       this.$emit("update:categoryId", this.currentCategoryId);
-	  this.$emit("update:itemColor", this.currentColor);
+	  this.$emit("update:itemColorId", this.currentColorId);
     },
     reset() {
       this.$emit("update:priceFrom", 0);
       this.$emit("update:priceTo", 0);
       this.$emit("update:categoryId", 0);
-	  this.$emit("update:itemColor", '');
-	  this.currentColor = '#73B6EA';
+	  this.$emit("update:itemColorId", 0);
     }
   }
 };
