@@ -1,8 +1,8 @@
 <template>
   <li class="catalog__item">
-    <a class="catalog__pic" href="#" @click.prevent="gotoPage('product', {id: item.id})">
+    <router-link class="catalog__pic" :to="{ name: 'product', params: {id: item.id}}">
       <img :src="item.img" :alt="item.name" />
-    </a>
+    </router-link>
 
     <h3 class="catalog__title">
       <a href="#">
