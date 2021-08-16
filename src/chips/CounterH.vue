@@ -50,6 +50,16 @@ export default {
 			}
 		}
 	},
+	watch: {
+		counterLocal(value) {
+			if (this.counterLocal <= 1 || this.counterLocal >= 100) 
+				return;
+			else {
+				this.counterLocal = value;
+				this.$emit('update:counterStart', this.counterLocal);
+			}
+		}
+	}
 }
 </script>
 

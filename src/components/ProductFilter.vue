@@ -39,15 +39,7 @@
 
       <fieldset class="form__block">
         <legend class="form__legend">Цвет</legend>
-        <ul class="colors">
-          <li class="colors__item" v-for="color in colors" :key="color.id">
-            <label class="colors__label">
-              <input
-            	v-model="currentColorId" class="colors__radio sr-only" type="radio" name="color" :value="color.id"/>
-              <span class="colors__value" :style="{'background-color': color.color}"></span>
-            </label>
-          </li>
-        </ul>
+        <ColorPagination :colorStart.sync="currentColorId"/>
       </fieldset>
 
       <fieldset class="form__block">
@@ -128,58 +120,59 @@
 
 <script>
 import categories from "@/data/categories.js";
-import colors from "@/data/colors.js";
+import ColorPagination from "@/chips/ColorPagination";
 
 export default {
-  data() {
-    return {
-      currentPriceFrom: 0,
-      currentPriceTo: 0,
-      currentCategoryId: 0,
-	  currentColorId: 0,
-    };
-  },
-  props: {
-    priceFrom: { type: Number },
-    priceTo: { type: Number },
-    categoryId: { type: Number },
-	itemColorId: { type: Number }
-  },
-  computed: {
-    categories() {
-      return categories;
-    },
-    colors() {
-      return colors;
-    }
-  },
-  watch: {
-    priceFrom(value) {
-      this.currentPriceFrom = value;
-    },
-    priceTo(value) {
-      this.currentPriceTo = value;
-    },
-    categoryId(value) {
-      this.currentCategoryId = value;
-    },
-	itemColorId(value) {
-		this.itemColorId = value;
+	data() {
+		return {
+			currentPriceFrom: 0,
+			currentPriceTo: 0,
+			currentCategoryId: 0,
+			currentColorId: 0,
+		};
+	},
+	components: {ColorPagination},
+	props: {
+		priceFrom: { type: Number },
+		priceTo: { type: Number },
+		categoryId: { type: Number },
+		itemColorId: { type: Number }
+	},
+	computed: {
+		categories() {
+			return categories;
+		},
+		colors() {
+			return colors;
+		}
+	},
+	watch: {
+		priceFrom(value) {
+			is.currentPriceFrom = value;
+		},
+		priceTo(value) {
+			this.currentPriceTo = value;
+		},
+		categoryId(value) {
+			this.currentCategoryId = value;
+		},
+		itemColorId(value) {
+			this.itemColorId = value;
+		}
+	},
+	methods: {
+		submit() {
+			this.$emit("update:priceFrom", this.currentPriceFrom);
+			this.$emit("update:priceTo", this.currentPriceTo);
+			this.$emit("update:categoryId", this.currentCategoryId);
+			this.$emit("update:itemColorId", this.currentColorId);
+		},
+		reset() {
+			this.$emit("update:priceFrom", 0);
+			this.$emit("update:priceTo", 0);
+			this.$emit("update:categoryId", 0);
+			this.$emit("update:itemColorId", 0);
+		}
 	}
-  },
-  methods: {
-    submit() {
-      this.$emit("update:priceFrom", this.currentPriceFrom);
-      this.$emit("update:priceTo", this.currentPriceTo);
-      this.$emit("update:categoryId", this.currentCategoryId);
-	  this.$emit("update:itemColorId", this.currentColorId);
-    },
-    reset() {
-      this.$emit("update:priceFrom", 0);
-      this.$emit("update:priceTo", 0);
-      this.$emit("update:categoryId", 0);
-	  this.$emit("update:itemColorId", 0);
-    }
-  }
 };
 </script>
