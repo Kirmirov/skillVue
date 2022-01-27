@@ -18,49 +18,43 @@
 
 <script>
 export default {
-	data() {
-		return {
-			counterLocal: this.counterStart,
-		}
-	},
-	props: {
-		addFrame: {
-			type: Boolean,
-			default: false
-		},
-		counterStart: {
-			type: Number,
-		}
-	},
-	methods: {
-		countMinus() {
-			if (this.counterLocal <= 1) 
-				return;
-			else {
-				this.counterLocal -= 1;
-				this.$emit('update:counterStart', this.counterLocal);
-			}
-		},
-		countPlus() {
-			if (this.counterLocal >= 100) 
-				return;
-			else {
-				this.counterLocal += 1;
-				this.$emit('update:counterStart', this.counterLocal);
-			}
-		}
-	},
-	watch: {
-		counterLocal(value) {
-			if (this.counterLocal <= 1 || this.counterLocal >= 100) 
-				return;
-			else {
-				this.counterLocal = value;
-				this.$emit('update:counterStart', this.counterLocal);
-			}
-		}
-	}
-}
+  data() {
+    return {
+      counterLocal: this.counterStart,
+    };
+  },
+  props: {
+    addFrame: {
+      type: Boolean,
+      default: false,
+    },
+    counterStart: {
+      type: Number,
+    },
+  },
+  methods: {
+    countMinus() {
+      if (this.counterLocal <= 1) return;
+
+      this.counterLocal -= 1;
+      this.$emit('update:counterStart', this.counterLocal);
+    },
+    countPlus() {
+      if (this.counterLocal >= 100) return;
+
+      this.counterLocal += 1;
+      this.$emit('update:counterStart', this.counterLocal);
+    },
+  },
+  watch: {
+    counterLocal(value) {
+      if (this.counterLocal <= 1 || this.counterLocal >= 100) return;
+
+      this.counterLocal = value;
+      this.$emit('update:counterStart', this.counterLocal);
+    },
+  },
+};
 </script>
 
 <style scoped>

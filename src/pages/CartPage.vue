@@ -49,26 +49,22 @@
 
 <script>
 import numberFormat from '@/helpers/numberFormat';
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 import CartItem from '@/components/CartItem';
 
 export default {
-	components: {CartItem},
-	filters: {
-		numberFormat
-	},
-	computed: {
-		...mapGetters({products: 'cartDetailProducts', totalPrice: 'cartTotalPrice', productCount: 'cartTotalProduct'}),
-		countName(){
-			if (this.productCount == 11 || this.productCount == 12 || this.productCount == 13 || this.productCount == 14)
-				return 'товаров';
-			else if (this.productCount % 10 == 1)
-				return 'товар';
-			else if (this.productCount % 10 == 2 || this.productCount % 10 == 3 || this.productCount % 10 == 4)
-				return 'товара';
-			else
-				return 'товаров';
-		}
-	},
-}
+  components: { CartItem },
+  filters: {
+    numberFormat,
+  },
+  computed: {
+    ...mapGetters({ products: 'cartDetailProducts', totalPrice: 'cartTotalPrice', productCount: 'cartTotalProduct' }),
+    countName() {
+      if (this.productCount == 11 || this.productCount == 12 || this.productCount == 13 || this.productCount == 14) return 'товаров';
+      if (this.productCount % 10 == 1) return 'товар';
+      if (this.productCount % 10 == 2 || this.productCount % 10 == 3 || this.productCount % 10 == 4) return 'товара';
+      return 'товаров';
+    },
+  },
+};
 </script>

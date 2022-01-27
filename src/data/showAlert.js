@@ -1,5 +1,5 @@
 const showAlert = (string) => {
-    alert(string)
-}
+  alert(string);
+};
 
-export default showAlert
+export default showAlert;

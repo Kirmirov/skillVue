@@ -21,28 +21,27 @@
 
 import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
-import ColorPagination from "@/chips/ColorPagination";
-
+import ColorPagination from '@/chips/ColorPagination';
 
 export default {
-	data() {
-		return {
-			colorStart: 1
-		}
-	},
-	components: {ColorPagination},
-	props: {
-		item: {
-			type: Object,
-			require: false,
-		},
-	},
-	methods: {
-		gotoPage,
-	},
-	filters: {
-		numberFormat
-	}
+  data() {
+    return {
+      colorStart: 1,
+    };
+  },
+  components: { ColorPagination },
+  props: {
+    item: {
+      type: Object,
+      require: false,
+    },
+  },
+  methods: {
+    gotoPage,
+  },
+  filters: {
+    numberFormat,
+  },
 };
 </script>
 

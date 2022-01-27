@@ -94,6 +94,6 @@
 
 <script>
 export default {
-	
-}
+
+};
 </script>

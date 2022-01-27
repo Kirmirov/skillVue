@@ -1,38 +1,38 @@
 const colors = [
   {
-	id: 1,
+    id: 1,
     color: '#73B6EA',
-	short: true
+    short: true,
   },
   {
-	id: 2,
+    id: 2,
     color: '#FFBE15',
-	short: false
+    short: false,
   },
   {
-	id: 3,
+    id: 3,
     color: '#939393',
-	short: false
+    short: false,
   },
   {
-	id: 4,
+    id: 4,
     color: '#8BE000',
-	short: true
+    short: true,
   },
   {
-	id: 5,
+    id: 5,
     color: '#FF6B00',
-	short: false
+    short: false,
   },
   {
-	id: 6,
+    id: 6,
     color: '#FFF',
-	short: false
+    short: false,
   },
   {
-	id: 7,
+    id: 7,
     color: '#000',
-	short: true
+    short: true,
   },
 ];
 

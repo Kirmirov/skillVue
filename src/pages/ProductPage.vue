@@ -19,7 +19,6 @@
 				</li>
 			</ul>
 		</div>
-
 		<section class="item">
 			<div class="item__pics pics">
 				<div class="pics__wrapper">
@@ -155,42 +154,42 @@
 				</div>
 			</div>
 		</section>
-	</main>	
+	</main>
 </template>
 
 <script>
-	import products from '@/data/products';
-	import categories from '@/data/categories';
-	import gotoPage from '@/helpers/gotoPage';
-	import numberFormat from '@/helpers/numberFormat';
-	import CounterH from '@/chips/CounterH';
+import products from '@/data/products';
+import categories from '@/data/categories';
+import gotoPage from '@/helpers/gotoPage';
+import numberFormat from '@/helpers/numberFormat';
+import CounterH from '@/chips/CounterH';
 
 export default {
-	data(){
-		return{
-			productAmount: 1,
-		}
-	},
-	components: {CounterH},
-	computed: {
-		product(){
-			return products.find(product => product.id === +this.$route.params.id);
-		},
-		category(){
-			return categories.find(category => category.id === this.product.categoryID)
-		},
-	}, 
-	methods: {
-		gotoPage,
-		addToCart() {
-			this.$store.commit(
-				'addProductToCart',
-				{ productId: this.product.id, amount: this.productAmount }
-			);
-		},
-	},
-	filters: {
-		numberFormat,
-	}
-}
+  data() {
+    return {
+      productAmount: 1,
+    };
+  },
+  components: { CounterH },
+  computed: {
+    product() {
+      return products.find((product) => product.id === +this.$route.params.id);
+    },
+    category() {
+      return categories.find((category) => category.id === this.product.categoryID);
+    },
+  },
+  methods: {
+    gotoPage,
+    addToCart() {
+      this.$store.commit(
+        'addProductToCart',
+        { productId: this.product.id, amount: this.productAmount },
+      );
+    },
+  },
+  filters: {
+    numberFormat,
+  },
+};
 </script>

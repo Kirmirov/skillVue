@@ -119,60 +119,71 @@
 </template>
 
 <script>
-import categories from "@/data/categories.js";
-import ColorPagination from "@/chips/ColorPagination";
+import ColorPagination from '@/chips/ColorPagination';
+import axios from 'axios';
+import { API_BASE_URL } from '@/config';
 
 export default {
-	data() {
-		return {
-			currentPriceFrom: 0,
-			currentPriceTo: 0,
-			currentCategoryId: 0,
-			currentColorId: 0,
-		};
-	},
-	components: {ColorPagination},
-	props: {
-		priceFrom: { type: Number },
-		priceTo: { type: Number },
-		categoryId: { type: Number },
-		itemColorId: { type: Number }
-	},
-	computed: {
-		categories() {
-			return categories;
-		},
-		colors() {
-			return colors;
-		}
-	},
-	watch: {
-		priceFrom(value) {
-			is.currentPriceFrom = value;
-		},
-		priceTo(value) {
-			this.currentPriceTo = value;
-		},
-		categoryId(value) {
-			this.currentCategoryId = value;
-		},
-		itemColorId(value) {
-			this.itemColorId = value;
-		}
-	},
-	methods: {
-		submit() {
-			this.$emit("update:priceFrom", this.currentPriceFrom);
-			this.$emit("update:priceTo", this.currentPriceTo);
-			this.$emit("update:categoryId", this.currentCategoryId);
-			this.$emit("update:itemColorId", this.currentColorId);
-		},
-		reset() {
-			this.$emit("update:priceFrom", 0);
-			this.$emit("update:priceTo", 0);
-			this.$emit("update:categoryId", 0);
-			this.$emit("update:itemColorId", 0);
-		}
-	}
+  data() {
+    return {
+      currentPriceFrom: 0,
+      currentPriceTo: 0,
+      currentCategoryId: 0,
+      currentColorId: 0,
+      categoriesData: null,
+    };
+  },
+  components: { ColorPagination },
+  props: {
+    priceFrom: { type: Number },
+    priceTo: { type: Number },
+    categoryId: { type: Number },
+    itemColorId: { type: Number },
+  },
+  computed: {
+    categories() {
+      return this.categoriesData
+        ? this.categoriesData.items
+        : [];
+    },
+    colors() {
+      return colors;
+    },
+  },
+  watch: {
+    priceFrom(value) {
+      is.currentPriceFrom = value;
+    },
+    priceTo(value) {
+      this.currentPriceTo = value;
+    },
+    categoryId(value) {
+      this.currentCategoryId = value;
+    },
+    itemColorId(value) {
+      this.itemColorId = value;
+    },
+  },
+  methods: {
+    submit() {
+      this.$emit('update:priceFrom', this.currentPriceFrom);
+      this.$emit('update:priceTo', this.currentPriceTo);
+      this.$emit('update:categoryId', this.currentCategoryId);
+      this.$emit('update:itemColorId', this.currentColorId);
+    },
+    reset() {
+      this.$emit('update:priceFrom', 0);
+      this.$emit('update:priceTo', 0);
+      this.$emit('update:categoryId', 0);
+      this.$emit('update:itemColorId', 0);
+    },
+    loadCategories() {
+      axios.get(`${API_BASE_URL}/api/productCategories`)
+        .then((response) => this.categoriesData = response.data);
+    },
+  },
+  created() {
+    this.loadCategories();
+  },
 };
 </script>

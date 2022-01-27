@@ -20,6 +20,6 @@
 import CartIndicator from '@/components/CartIndicator';
 
 export default {
-	components: {CartIndicator}
-}
+  components: { CartIndicator },
+};
 </script>

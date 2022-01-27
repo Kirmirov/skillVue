@@ -27,33 +27,33 @@
 <script>
 import numberFormat from '@/helpers/numberFormat';
 import CounterH from '@/chips/CounterH';
-import {mapMutations} from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
-	components: {CounterH},
-	props: {
-		item: {
-			type: Object,
-			require: true
-		}
-	},
-	filters: {
-		numberFormat
-	},
-	computed: {
-		amount: {
-			get(){
-				return this.item.amount;
-			},
-			set(value){
-				this.$store.commit('updateCartProductAmount', {productId: this.item.productId, amount: value});
-			}
-		}
-	},
-	methods: {
-		...mapMutations({deleteProduct:'deleteProductFromCart'})
-	}
-}
+  components: { CounterH },
+  props: {
+    item: {
+      type: Object,
+      require: true,
+    },
+  },
+  filters: {
+    numberFormat,
+  },
+  computed: {
+    amount: {
+      get() {
+        return this.item.amount;
+      },
+      set(value) {
+        this.$store.commit('updateCartProductAmount', { productId: this.item.productId, amount: value });
+      },
+    },
+  },
+  methods: {
+    ...mapMutations({ deleteProduct: 'deleteProductFromCart' }),
+  },
+};
 </script>
 
 <style scoped>
